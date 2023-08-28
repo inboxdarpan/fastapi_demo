@@ -6,15 +6,17 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 from sqlalchemy.orm import Session
 import time
-from . import models, schemas, utils
+from . import models, schemas, utils, config
 from .database import SessionLocal, engine, get_db
 from .routers import users, posts, auth
+
 
 #learn pagination
 # rate limiting
 # authentication
 
 models.Base.metadata.create_all(bind=engine) #note
+
 app = FastAPI()
 
 # Older way of making a database connection
