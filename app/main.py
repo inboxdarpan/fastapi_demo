@@ -1,4 +1,4 @@
-from typing import Optional, List
+
 from fastapi import FastAPI, status, HTTPException, Response, Depends
 # from fastapi.params import Body
 import psycopg2
@@ -8,7 +8,7 @@ from sqlalchemy.orm import Session
 import time
 from . import models, schemas, utils
 from .database import SessionLocal, engine, get_db
-from .routers import users, posts
+from .routers import users, posts, auth
 
 #learn pagination
 # rate limiting
@@ -31,8 +31,9 @@ app = FastAPI()
 #         print("Error", error)
 #         time.sleep(2)
 
+app.include_router(posts.router)
 app.include_router(users.router)
-app.include_router(users.router)
+app.include_router(auth.router)
 
 @app.get("/")
 def root():
